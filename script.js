@@ -1,4 +1,4 @@
-const quoteContainers = document.getElementById('quote-container');
+const quoteContainer = document.getElementById('quote-container');
 const quoteText = document.getElementById('quote');
 const authorText = document.getElementById('author');
 const twitterBtn = document.getElementById('twitter');
@@ -6,7 +6,7 @@ const newQuoteBtn = document.getElementById('new-quote');
 
 
 // using local file NOT online API--------
-function newQuotes() {
+function newQuote() {
     const quote = localQuotes[Math.floor(Math.random() * localQuotes.length)];
     // Check if Author field is blank and replace it with "Unknown"
     if(!quote.author ) {
@@ -23,6 +23,14 @@ function newQuotes() {
     quoteText.textContent = quote.text;
 }
 
+// Tweet Quote
+function  tweetQuote() {
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${quoteText.textContent} - ${authorText.textContent}`;
+    window.open(twitterUrl, '_blank');
+}
 
-newQuotes();
+// Event Listeners
+newQuoteBtn.addEventListener('click', newQuote)
+twitterBtn.addEventListener('click', tweetQuote);
+newQuote();
 
